@@ -8,7 +8,7 @@ return (
 
 
 { todo.completed ?
-  <li key={todo.id} className="w-[100%] h-[3.5rem] flex bg-green-700 opacity-[.7] items-center place-content-around   rounded-lg">
+  <li key={todo.id} className="w-[100%]  h-[3.5rem] flex bg-green-700 opacity-[.7] items-center place-content-around   rounded-lg">
          
    
 
@@ -27,7 +27,7 @@ return (
   
          </li> : 
 
-<li key={todo.id} className="w-[100%] h-[3.5rem] flex bg-white items-center place-content-around  rounded-lg">
+<li key={todo.id} className="w-[100%] dark:bg-neutral-300 h-[3.5rem] flex bg-white items-center place-content-around  rounded-lg">
          
    
 

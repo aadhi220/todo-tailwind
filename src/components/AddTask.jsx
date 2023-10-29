@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function AddTask({ task,setTask,AddTasks }) {
 
 
   return (
     <>
-      <form className=" w-[40rem] px-[10px] py-[2px]  bg-white  flex place-content-between items-center rounded-[5rem]">
+      <form className=" dark:bg-neutral-300 w-[40rem] px-[10px] py-[2px]  bg-white  flex place-content-between items-center rounded-[5rem]">
         <input
           type="text"
-          className="   rounded-[5rem] w-[32.5rem] px-[1rem] h-[4rem] border-0 text-gray-900 ring-0 outline-none  placeholder:text-gray-400  text-2xl  font-[400] tracking-wide"
+          className="  dark:bg-neutral-300 rounded-[5rem] w-[32.5rem] px-[1rem] h-[4rem] border-0 text-gray-900 ring-0 outline-none  placeholder:text-gray-400  text-2xl  font-[400] tracking-wide"
           placeholder=" New Task"
           value={task || ""}
           onChange={(e) => setTask(e.target.value)}
+          required
         />
         <button
           onClick={(e) => AddTasks(e)}
