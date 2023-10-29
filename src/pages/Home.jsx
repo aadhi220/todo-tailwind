@@ -45,14 +45,14 @@ export default function Home() {
   }
   const toggleComplete = (id) => {
     setTodos(
-      todos.map((todo) =>
+      todos?.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
   const editTodo = (id) => {
     setTodos(
-      todos.map((todo) =>
+      todos?.map((todo) =>
         todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
       )
     );
@@ -60,17 +60,35 @@ export default function Home() {
 
   const editTask = (id,editedText) => {
     setTodos(
-      todos.map((todo) =>
+      todos?.map((todo) =>
         todo.id === id ? { ...todo,text:editedText, isEditing: !todo.isEditing } : todo
       )
     );
   };
 
+  
 
+const clearTodo =()=>{
+  localStorage.removeItem("todos");
+  setTodos(()=>{
+    const savedTodos =localStorage.getItem("todos");
+    if(savedTodos){
+      return JSON.parse(savedTodos);
+      
+    }else {
+      return [];
+    }
+  });
+
+  
+  
+
+
+}
 
   
   return (
-    <div className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-[100vh] flex  place-content-center flex-col gap-[2rem]  items-center ' >
+    <div className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-[100vh] flex  place-content-start pt-[5rem] flex-col gap-[2rem]  items-center ' >
     
     <h1 className='bg-white px-[2rem] py-[1rem] rounded-[5rem] text-red-600 text-4xl  font-[600] tracking-widest '>TODO LIST</h1>
     
@@ -82,15 +100,15 @@ export default function Home() {
           Tasks :
         </h2>
 
-        <h2>
-          <i className="fa-solid fa-trash-can fa-2xl "></i>
-        </h2>
+       { todos.length>1 && <button onClick={()=>clearTodo()} className='hover:ease-in-out duration-100 text-[1.5rem] hover:text-[1.7rem] hover:text-red-600'>
+          <i className="fa-solid fa-trash-can  "></i>
+        </button>}
         </div>  
 <ul className="w-[40rem] flex flex-col gap-[4px]  ">
        {/* list map here */}
             {/* list items */}
 
-            {todos.map((todo,index)=>(  
+            {todos?.map((todo,index)=>(  
 
  !todo.completed && (todo.isEditing ? 
   <EditTodo todo={todo} handleDelete={handleDelete} editTask={editTask}/>
@@ -98,7 +116,7 @@ export default function Home() {
   )
 ))  }
 
-{todos.map((todo,index)=>(  
+{todos?.map((todo,index)=>(  
 
 todo.completed && (todo.isEditing ? 
  <EditTodo todo={todo} handleDelete={handleDelete} editTask={editTask}/>
