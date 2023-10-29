@@ -43,7 +43,13 @@ export default function Home() {
     });
     setTodos(removeItem);
   }
-
+  const toggleComplete = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
   const editTodo = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -80,16 +86,24 @@ export default function Home() {
           <i className="fa-solid fa-trash-can fa-2xl "></i>
         </h2>
         </div>  
-<ul className="w-[40rem] flex flex-col gap-[4px] ">
+<ul className="w-[40rem] flex flex-col gap-[4px]  ">
        {/* list map here */}
             {/* list items */}
 
             {todos.map((todo,index)=>(  
 
-todo.isEditing ? 
-<EditTodo todo={todo} handleDelete={handleDelete} editTask={editTask}/>
-: <TaskList index={index}  todo={todo} setTodos={setTodos} handleDelete={handleDelete} editTodo={editTodo} />
+ !todo.completed && (todo.isEditing ? 
+  <EditTodo todo={todo} handleDelete={handleDelete} editTask={editTask}/>
+  : <TaskList index={index}  todo={todo} setTodos={setTodos} handleDelete={handleDelete} toggleComplete={toggleComplete} editTodo={editTodo} />
+  )
+))  }
 
+{todos.map((todo,index)=>(  
+
+todo.completed && (todo.isEditing ? 
+ <EditTodo todo={todo} handleDelete={handleDelete} editTask={editTask}/>
+ : <TaskList index={index}  todo={todo} setTodos={setTodos} handleDelete={handleDelete} toggleComplete={toggleComplete} editTodo={editTodo} />
+ )
 ))  }
            
 
